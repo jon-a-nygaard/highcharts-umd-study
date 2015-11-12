@@ -1,11 +1,11 @@
 var React = require('react'),
-	Adapter = require('highcharts-release/adapters/standalone-framework.src'),
-	Highcharts = require('highcharts-release/highcharts.src');
-	console.log(Highcharts);
+	A = require('../highcharts/standalone-framework.src'),
+	H = require('../highcharts/highcharts.src');
 
 var App = React.createClass({
 	componentDidMount: function () {
-		window.HighchartsAdapter = Adapter;
+		HighchartsAdapter = A();
+		Highcharts = H(HighchartsAdapter);
 		var chart = new Highcharts.Chart({
 			chart: {
 				renderTo: 'chart-container',
