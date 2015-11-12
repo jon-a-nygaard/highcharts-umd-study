@@ -12,15 +12,15 @@
 // JSLint options:
 /*global Highcharts, HighchartsAdapter, document, window, navigator, setInterval, clearInterval, clearTimeout, setTimeout, location, jQuery, $, console, each, grep */
 /*jslint ass: true, sloppy: true, forin: true, plusplus: true, nomen: true, vars: true, regexp: true, newcap: true, browser: true, continue: true, white: true */
-(function(root, factory) {
-	if (typeof module === "object" && typeof module.exports === "object") {
+(function(factory) {
+	if (typeof module === "object" && module.exports) {
 		module.exports = function (a, w) {
 			return factory(a, w);
 		};
 	} else {
-		root.Highcharts = factory(root.HighchartsAdapter);
+		window.Highcharts = factory(window.HighchartsAdapter);
 	}
-}(typeof window !== "undefined" ? window : this, function(HighchartsAdapter, win) {
+}(function(HighchartsAdapter, win) {
 // encapsulated variables
 var UNDEFINED,
 	win = win || window,

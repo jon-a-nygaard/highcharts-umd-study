@@ -8,18 +8,19 @@
 
 
 /*global Highcharts */
-(function(root, factory) {
-	if (typeof module === "object" && typeof module.exports === "object") {
+(function(factory) {
+	if (typeof module === "object" && module.exports) {
 		module.exports = function(w) {
 			return factory(w);
 		};
 	} else {
-		root.HighchartsAdapter = factory(root);
+		window.HighchartsAdapter = factory();
 	}
 // Pass this if window is not defined yet
-}(typeof window !== "undefined" ? window : this, function () {
+}(function (win) {
 
 var UNDEFINED,
+	win = win || window,
 	doc = document,
 	emptyArray = [],
 	timers = [],

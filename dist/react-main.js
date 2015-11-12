@@ -43,7 +43,7 @@ ReactDOM.render(new App(), document.getElementById('react-app'));
  *
  * License: www.highcharts.com/license
  */ // JSLint options:
-/*global Highcharts, HighchartsAdapter, document, window, navigator, setInterval, clearInterval, clearTimeout, setTimeout, location, jQuery, $, console, each, grep */ /*jslint ass: true, sloppy: true, forin: true, plusplus: true, nomen: true, vars: true, regexp: true, newcap: true, browser: true, continue: true, white: true */(function(root,factory){if(typeof module === "object" && typeof module.exports === "object"){module.exports = function(a,w){return factory(a,w);};}else {root.Highcharts = factory(root.HighchartsAdapter);}})(typeof window !== "undefined"?window:this,function(HighchartsAdapter,win){ // encapsulated variables
+/*global Highcharts, HighchartsAdapter, document, window, navigator, setInterval, clearInterval, clearTimeout, setTimeout, location, jQuery, $, console, each, grep */ /*jslint ass: true, sloppy: true, forin: true, plusplus: true, nomen: true, vars: true, regexp: true, newcap: true, browser: true, continue: true, white: true */(function(factory){if(typeof module === "object" && module.exports){module.exports = function(a,w){return factory(a,w);};}else {window.Highcharts = factory(window.HighchartsAdapter);}})(function(HighchartsAdapter,win){ // encapsulated variables
 var UNDEFINED,win=win || window,doc=document,math=Math,mathRound=math.round,mathFloor=math.floor,mathCeil=math.ceil,mathMax=math.max,mathMin=math.min,mathAbs=math.abs,mathCos=math.cos,mathSin=math.sin,mathPI=math.PI,deg2rad=mathPI * 2 / 360, // some variables
 userAgent=navigator.userAgent,isOpera=win.opera,isMS=/(msie|trident|edge)/i.test(userAgent) && !isOpera,docMode8=doc.documentMode === 8,isWebKit=!isMS && /AppleWebKit/.test(userAgent),isFirefox=/Firefox/.test(userAgent),isTouchDevice=/(Mobile|Android|Windows Phone)/.test(userAgent),SVG_NS='http://www.w3.org/2000/svg',hasSVG=!!doc.createElementNS && !!doc.createElementNS(SVG_NS,'svg').createSVGRect,hasBidiBug=isFirefox && parseInt(userAgent.split('Firefox/')[1],10) < 4, // issue #38
 useCanVG=!hasSVG && !isMS && !!doc.createElement('canvas').getContext,Renderer,hasTouch,symbolSizes={},idCounter=0,garbageBin,defaultOptions,dateFormat, // function
@@ -4025,18 +4025,19 @@ arrayMin:arrayMin,arrayMax:arrayMax,charts:charts,dateFormat:dateFormat,error:er
  */
 
 /*global Highcharts */
-(function (root, factory) {
-	if (typeof module === "object" && typeof module.exports === "object") {
+(function (factory) {
+	if (typeof module === "object" && module.exports) {
 		module.exports = function (w) {
 			return factory(w);
 		};
 	} else {
-		root.HighchartsAdapter = factory(root);
+		window.HighchartsAdapter = factory();
 	}
 	// Pass this if window is not defined yet
-})(typeof window !== "undefined" ? window : this, function () {
+})(function (win) {
 
 	var UNDEFINED,
+	    win = win || window,
 	    doc = document,
 	    emptyArray = [],
 	    timers = [],

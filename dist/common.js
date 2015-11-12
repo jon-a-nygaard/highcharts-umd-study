@@ -149,15 +149,15 @@ new Highcharts.Chart({
 // JSLint options:
 /*global Highcharts, HighchartsAdapter, document, window, navigator, setInterval, clearInterval, clearTimeout, setTimeout, location, jQuery, $, console, each, grep */
 /*jslint ass: true, sloppy: true, forin: true, plusplus: true, nomen: true, vars: true, regexp: true, newcap: true, browser: true, continue: true, white: true */
-(function(root, factory) {
-	if (typeof module === "object" && typeof module.exports === "object") {
+(function(factory) {
+	if (typeof module === "object" && module.exports) {
 		module.exports = function (a, w) {
 			return factory(a, w);
 		};
 	} else {
-		root.Highcharts = factory(root.HighchartsAdapter);
+		window.Highcharts = factory(window.HighchartsAdapter);
 	}
-}(typeof window !== "undefined" ? window : this, function(HighchartsAdapter, win) {
+}(function(HighchartsAdapter, win) {
 // encapsulated variables
 var UNDEFINED,
 	win = win || window,
@@ -19060,18 +19060,19 @@ extend(Highcharts, {
 
 
 /*global Highcharts */
-(function(root, factory) {
-	if (typeof module === "object" && typeof module.exports === "object") {
+(function(factory) {
+	if (typeof module === "object" && module.exports) {
 		module.exports = function(w) {
 			return factory(w);
 		};
 	} else {
-		root.HighchartsAdapter = factory(root);
+		window.HighchartsAdapter = factory();
 	}
 // Pass this if window is not defined yet
-}(typeof window !== "undefined" ? window : this, function () {
+}(function (win) {
 
 var UNDEFINED,
+	win = win || window,
 	doc = document,
 	emptyArray = [],
 	timers = [],
@@ -19693,15 +19694,15 @@ return HighchartsAdapter;
  *
  * License: www.highcharts.com/license
  */
-(function(root, factory) {
-	if (typeof module === "object" && typeof module.exports === "object") {
+(function(factory) {
+	if (typeof module === "object" && module.exports) {
 		module.exports = function (H, A) {
 			return factory(H, A);
 		};
 	} else {
-		factory(root.Highcharts, root.HighchartsAdapter);
+		window.Highcharts = factory(window.Highcharts, window.HighchartsAdapter);
 	}
-}(typeof window !== "undefined" ? window : this, function(H, HighchartsAdapter) {
+}(function(H, HighchartsAdapter) {
 	var seriesTypes = H.seriesTypes,
 		map = H.map,
 		merge = H.merge,

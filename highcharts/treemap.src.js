@@ -6,15 +6,15 @@
  *
  * License: www.highcharts.com/license
  */
-(function(root, factory) {
-	if (typeof module === "object" && typeof module.exports === "object") {
+(function(factory) {
+	if (typeof module === "object" && module.exports) {
 		module.exports = function (H, A) {
 			return factory(H, A);
 		};
 	} else {
-		factory(root.Highcharts, root.HighchartsAdapter);
+		window.Highcharts = factory(window.Highcharts, window.HighchartsAdapter);
 	}
-}(typeof window !== "undefined" ? window : this, function(H, HighchartsAdapter) {
+}(function(H, HighchartsAdapter) {
 	var seriesTypes = H.seriesTypes,
 		map = H.map,
 		merge = H.merge,
