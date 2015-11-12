@@ -1,6 +1,6 @@
-var Adapter = window.HighchartsAdapter = require('highcharts-release/adapters/standalone-framework.src'),
-    Highcharts = require('highcharts-release/highcharts.src');
-require('highcharts-release/modules/treemap.src');
+var Adapter = require('../highcharts/standalone-framework.src')(),
+    Highcharts = require('../highcharts/highcharts.src')(Adapter),
+    Highcharts = require('../highcharts/treemap.src')(Highcharts, Adapter); // Extend Highcharts with treemap module
 new Highcharts.Chart({
     chart: {
         renderTo: 'chart-container'
