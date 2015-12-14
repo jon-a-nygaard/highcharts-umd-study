@@ -1,27 +1,32 @@
 var React = require('react'),
-	A = require('../highcharts/standalone-framework.src'),
-	H = require('../highcharts/highcharts.src');
+	Highcharts = require('highcharts');
 
-var App = React.createClass({
+module.exports = React.createClass({
+	/**
+	 * When the DOM is ready, create the chart.
+	 */
 	componentDidMount: function () {
-		HighchartsAdapter = A();
-		Highcharts = H(HighchartsAdapter);
-		var chart = new Highcharts.Chart({
-			chart: {
-				renderTo: 'chart-container',
-				height: 400
-			},
-			xAxis: {
-				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-			},
-			series: [{
-				data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-			}]
-		});
+		var props = this.props,
+			options = props.options,
+			type = props.type || "Chart";
+		options.chart = options.chart || {};
+		options.chart.renderTo = this.container;
+		// Set container which the chart should render to.
+		this.chart = new Highcharts[type](options);
 	},
+
+	/**
+	 * Destroy chart before unmount.
+	 */
+	componentWillUnmount: function () {
+		this.chart.destroy();
+	},
+
+	/**
+	 * Highcharts create its own container, thus our render method returns null. 
+	 */
 	render: function () {
-		return React.createElement('div', { id: 'chart-container'});
+		this.container = this.container || this.props.container || 'chart-' + Math.random().toString(36).substr(2, 5);
+		return <div id={this.container}></div>;
 	}
 });
-
-module.exports = App;
