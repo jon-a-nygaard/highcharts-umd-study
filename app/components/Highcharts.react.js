@@ -1,18 +1,16 @@
 var React = require('react'),
-    Highcharts = require('highcharts');
+    Highcharts = require('../../../highcharts/js/highcharts.src');
 
 module.exports = React.createClass({
     /**
      * When the DOM is ready, create the chart.
      */
     componentDidMount: function () {
-        var props = this.props,
-            options = props.options,
-            type = props.type || "Chart";
-        options.chart = options.chart || {};
-        options.chart.renderTo = this.container;
         // Set container which the chart should render to.
-        this.chart = new Highcharts[type](options);
+        this.chart = new Highcharts[this.props.type || "Chart"](
+            this.container, 
+            this.props.options
+        );
     },
 
     /**
